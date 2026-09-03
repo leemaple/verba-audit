@@ -15,3 +15,18 @@ jobs:
           fetch-depth: 0
       - name: Run repo guard
         run: bash scripts/repo-guard.sh
+
+  baseline-tests:
+    name: baseline unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test deps
+        run: pip install pytest
+      - name: Run baseline tests
+        run: pytest prestudy/baseline/test_baseline.py -q
+      - name: Baseline regression (small pool)
+        run: python prestudy/baseline/baseline.py --pool-size 500 --pool-positives 50 --seeds 2
