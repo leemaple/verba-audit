@@ -10,6 +10,12 @@ data/
 artifacts/
 runs/
 results/
+prestudy-local/
+
+# Local virtualenvs and caches
+.venv/
+.venv-*/
+.pytest_cache/
 
 # Secrets and environment files
 .env
